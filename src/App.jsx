@@ -213,10 +213,7 @@ export default function App() {
               key={project.id}
               className="flex justify-between items-center mt-2"
             >
-              <span
-                className="cursor-pointer text-black hover:underline"
-                onClick={() => setSelectedProject(project)}
-              >
+              <span onClick={() => setSelectedProject(project)}>
                 {project.title} ({calculateProgress(project.tasks)}%)
               </span>
               <Button
@@ -296,10 +293,7 @@ export default function App() {
                     </SelectContent>
                   </Select>
                   <div className="mt-4 flex justify-end space-x-2">
-                    <Button
-                      variant="outline"
-                      onClick={() => setIsNewTaskOpen(false)}
-                    >
+                    <Button onClick={() => setIsNewTaskOpen(false)}>
                       Cancel
                     </Button>
                     <Button onClick={handleCreateTask}>Create Task</Button>
@@ -315,7 +309,7 @@ export default function App() {
               />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline">{filterStatus}</Button>
+                  <Button>{filterStatus}</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem
@@ -361,7 +355,7 @@ export default function App() {
                               <p className="text-gray-600">
                                 {task.description}
                               </p>
-                              <p className="text-sm text-gray-500">
+                              <p className="text-sm">
                                 Due: {task.dueDate || "No due date"}
                               </p>
                             </div>

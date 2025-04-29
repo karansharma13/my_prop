@@ -116,13 +116,18 @@ export default function App() {
 
   // Task Deletion
   const handleDeleteTask = (taskId) => {
-    const updatedProjects = projects.map((p) => {
-      if (p.id === selectedProject.id) {
-        return { ...p, tasks: p.tasks.filter((t) => t.id !== taskId) };
+    const updatedProjects = projects.map((project) => {
+      if (project.id === selectedProject.id) {
+        const updatedTasks = project.tasks.filter((task) => task.id !== taskId);
+        return { ...project, tasks: updatedTasks };
       }
-      return p;
+      return project;
     });
+
     setProjects(updatedProjects);
+    setSelectedProject(
+      updatedProjects.find((p) => p.id === selectedProject.id)
+    );
   };
 
   // Task Update
@@ -178,7 +183,7 @@ export default function App() {
     selectedProject?.tasks.filter(
       (t) =>
         t.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-        (filterStatus === "Tasks" || t.status === filterStatus)
+        (filterStatus === "All Tasks" || t.status === filterStatus)
     ) || [];
 
   // Check if Task is Overdue
@@ -287,6 +292,7 @@ export default function App() {
                     onValueChange={(value) =>
                       setNewTask({ ...newTask, status: value })
                     }
+                    className="text-white dark:text-white"
                   >
                     <SelectTrigger className="mt-4">
                       <SelectValue placeholder="Select status" />
@@ -370,19 +376,20 @@ export default function App() {
                                 onValueChange={(value) =>
                                   handleUpdateTask(task.id, "status", value)
                                 }
+                                className="text-white"
                               >
-                                <SelectTrigger className="w-[150px]">
-                                  <SelectValue placeholder="Select status" />
+                                <SelectTrigger className="bg-white dark:bg-gray-800 text-black dark:text-white">
+                                  <SelectValue placeholder="Pending" />
                                 </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="Pending">
+                                <SelectContent className="bg-white dark:bg-gray-800 text-black dark:text-white">
+                                  <SelectItem value="pending">
                                     Pending
                                   </SelectItem>
-                                  <SelectItem value="In-Progress">
-                                    In-Progress
+                                  <SelectItem value="in-progress">
+                                    In Progress
                                   </SelectItem>
-                                  <SelectItem value="Completed">
-                                    Completed
+                                  <SelectItem value="complete">
+                                    Complete
                                   </SelectItem>
                                 </SelectContent>
                               </Select>

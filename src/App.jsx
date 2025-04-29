@@ -99,6 +99,11 @@ export default function App() {
         return p;
       });
       setProjects(updatedProjects);
+
+      // ✅ Add this line to reselect the updated project
+      const updated = updatedProjects.find((p) => p.id === selectedProject.id);
+      setSelectedProject(updated);
+
       setNewTask({
         title: "",
         description: "",
